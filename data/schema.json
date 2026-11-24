@@ -1,0 +1,231 @@
+{
+  "format_version": 1,
+  "synthetic": true,
+  "encoding": "UTF-8",
+  "tables": {
+    "service_rules": {
+      "description": "合成送达服务约定",
+      "fields": {
+        "id": {
+          "type": "string",
+          "description": "记录的稳定编号"
+        },
+        "route": {
+          "type": "string",
+          "description": "接力线路"
+        },
+        "region": {
+          "type": "string",
+          "description": "适用地址区"
+        },
+        "cutoff_hour": {
+          "type": "number",
+          "description": "当地截单小时"
+        },
+        "promise_hours": {
+          "type": "number",
+          "description": "承诺的最长小时"
+        },
+        "minimum_on_time": {
+          "type": "number",
+          "description": "允许展示的准时可靠性下限"
+        },
+        "maximum_daily_guarantees": {
+          "type": "number",
+          "description": "此接力范围每天的保障量"
+        },
+        "customer_compensation_minor": {
+          "type": "number",
+          "description": "已承诺失败时客户应收补偿分"
+        },
+        "carrier_share": {
+          "type": "array",
+          "description": "按最终有依据的责任适用的各方分担份额"
+        }
+      },
+      "references": {}
+    },
+    "orders": {
+      "description": "已被客户接受的原报价与保障",
+      "fields": {
+        "id": {
+          "type": "string",
+          "description": "记录的稳定编号"
+        },
+        "route": {
+          "type": "string",
+          "description": "全程线路"
+        },
+        "region": {
+          "type": "string",
+          "description": "目的地址区"
+        },
+        "goods_class": {
+          "type": "string",
+          "description": "可比货型"
+        },
+        "accepted_at": {
+          "type": "string",
+          "description": "客户接受报价时点"
+        },
+        "promised_by": {
+          "type": "string",
+          "description": "原承诺最晚送达"
+        },
+        "known_at": {
+          "type": "string",
+          "description": "订单获知时间"
+        },
+        "rule_id": {
+          "type": "string",
+          "description": "接受的服务约定"
+        },
+        "fee_minor": {
+          "type": "number",
+          "description": "费用分"
+        },
+        "requested_window": {
+          "type": "array",
+          "description": "客户可接受到达窗口"
+        }
+      },
+      "references": {
+        "rule_id": "service_rules"
+      }
+    },
+    "events": {
+      "description": "接力和投递事件原件",
+      "fields": {
+        "id": {
+          "type": "string",
+          "description": "记录的稳定编号"
+        },
+        "order_id": {
+          "type": "string",
+          "description": "订单"
+        },
+        "kind": {
+          "type": "string",
+          "description": "picked、handoff_out、handoff_in、attempt、signed或carrier_cancel；取消不抹除此前已接受的承诺"
+        },
+        "occurred_at": {
+          "type": "string",
+          "description": "事实发生时间"
+        },
+        "known_at": {
+          "type": "string",
+          "description": "资料获知时间"
+        },
+        "carrier": {
+          "type": "string",
+          "description": "登记的承运方"
+        },
+        "evidence": {
+          "type": "string",
+          "description": "scanned有原始凭据，missing为缺失待核"
+        },
+        "authorization_id": {
+          "type": "string",
+          "description": "声称引用的客户授权；空串无引用"
+        },
+        "replaces": {
+          "type": "string",
+          "description": "明确更正的原事件；空串为初报"
+        }
+      },
+      "references": {
+        "order_id": "orders"
+      }
+    },
+    "reschedule_consents": {
+      "description": "客户改约授权原件",
+      "fields": {
+        "id": {
+          "type": "string",
+          "description": "记录的稳定编号"
+        },
+        "order_id": {
+          "type": "string",
+          "description": "订单"
+        },
+        "consented": {
+          "type": "boolean",
+          "description": "客户是否确实同意"
+        },
+        "new_due": {
+          "type": "string",
+          "description": "同意后的最晚送达"
+        },
+        "consented_at": {
+          "type": "string",
+          "description": "客户表示时点"
+        },
+        "known_at": {
+          "type": "string",
+          "description": "授权收到时间"
+        }
+      },
+      "references": {
+        "order_id": "orders"
+      }
+    },
+    "capacity_notices": {
+      "description": "未来承接能力变化，不取消旧订单",
+      "fields": {
+        "id": {
+          "type": "string",
+          "description": "记录的稳定编号"
+        },
+        "route": {
+          "type": "string",
+          "description": "线路"
+        },
+        "date": {
+          "type": "string",
+          "description": "适用送达日期"
+        },
+        "capacity": {
+          "type": "number",
+          "description": "该日接力保障上限"
+        },
+        "known_at": {
+          "type": "string",
+          "description": "收到通知时间"
+        }
+      },
+      "references": {}
+    },
+    "compensation_receipts": {
+      "description": "客户补偿支付状态",
+      "fields": {
+        "id": {
+          "type": "string",
+          "description": "记录的稳定编号"
+        },
+        "order_id": {
+          "type": "string",
+          "description": "订单"
+        },
+        "amount_minor": {
+          "type": "number",
+          "description": "支付额分"
+        },
+        "at": {
+          "type": "string",
+          "description": "支付时点"
+        },
+        "status": {
+          "type": "string",
+          "description": "paid或pending"
+        },
+        "carrier_resolved": {
+          "type": "boolean",
+          "description": "承运方承担是否已经确认"
+        }
+      },
+      "references": {
+        "order_id": "orders"
+      }
+    }
+  }
+}
