@@ -7446,3 +7446,4 @@
 {"id":"cancel1394","order_id":"order1394","kind":"carrier_cancel","occurred_at":"2026-03-17T09:00:00+08:00","known_at":"2026-03-18T00:00:00+08:00","carrier":"linehaul","evidence":"scanned","authorization_id":"","replaces":""}
 {"id":"cancel1435","order_id":"order1435","kind":"carrier_cancel","occurred_at":"2026-04-27T09:00:00+08:00","known_at":"2026-04-28T00:00:00+08:00","carrier":"linehaul","evidence":"scanned","authorization_id":"","replaces":""}
 {"id":"cancel1476","order_id":"order1476","kind":"carrier_cancel","occurred_at":"2026-02-07T09:00:00+08:00","known_at":"2026-02-08T00:00:00+08:00","carrier":"linehaul","evidence":"scanned","authorization_id":"","replaces":""}
+{"id":"corrected-handoff-0","order_id":"order0","kind":"handoff_out","occurred_at":"2026-01-02T04:00:00+08:00","known_at":"2026-05-06T00:00:00+08:00","carrier":"linehaul","evidence":"scanned","authorization_id":"","replaces":"evt0-1"}
